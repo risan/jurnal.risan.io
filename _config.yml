@@ -37,7 +37,7 @@ gems:
 # Serving
 port: 4001
 host: localhost
-url: "http://localhost:4001"
+url: "http://jurnal.risan.io"
 baseurl: ""
 
 # Outputting
