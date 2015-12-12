@@ -1,0 +1,18 @@
+<nav class="main-nav" id="main-nav">
+  <h3>Menu</h3>
+  <a href="#" class="btn-nav-close" id="btn-nav-close">&times;</a>
+  <ul>
+    <li>
+      <a href="{% homepage_url %}" rel="home">Beranda</a>
+    </li>
+    {% for category in site.data.categories %}
+      <li>
+        <a href="{{ category[1].slug | prepend: site.category_archive.base_url | prepend: site.baseurl | prepend: site.url }}">{{ category[1].title }}</a>
+      </li>
+    {% endfor %}
+    <li>
+      <a href="{% about_url %}">Tentang Penulis</a>
+    </li>
+  </ul>
+</nav>
+<div class="nav-bg-overlay" id="nav-bg-overlay"></div>

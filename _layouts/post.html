@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+  {% include head.html %}
+  <body>
+    {% include header-post.html %}
+    <main class="content">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <header>
+          <small class="post-meta">
+            <time itemprop="datePublished" datetime="{{ page.date | date: '%F' }}">{{ page.date | date_locale }}</time>
+            <meta itemprop="image" content="{% featured_image_url %}">
+            <meta itemprop="description" content="{% description %}">
+          </small>
+          <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+        </header>
+        <div class="entry" itemprop="articleBody">{{ content }}</div>
+        <footer class="post-footer">
+          &#8212; <a itemprop="author" href="{% about_url %}" title="Tentang Risan Bagja" rel="author">Risan Bagja</a> dalam {% categories_link %}
+          {% include disqus.html %}
+        </footer>
+      </article>
+    </main>
+    {% include footer.html %}
+    {% include scripts.html %}
+    <script>{% include assets/disqus.min.js %}</script>
+  </body>
+</html>

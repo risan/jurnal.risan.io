@@ -1,0 +1,57 @@
+# Site settings.
+title: "Jurnal Risan Bagja"
+description: >
+  Jurnal pribadi Risan Bagja seputar pengalaman sehari-sehari, kehidupan di Swedia,
+  kisah-kisah avonturir, hingga curahan pemikirannya.
+lang: "id"
+
+facebook:
+  locale: "id_ID"
+  author: "https://www.facebook.com/risanbagja"
+
+twitter:
+  creator: "@risanbagja"
+
+# Header settings.
+header:
+  title: "Risan Bagja"
+  sub_heading: "Catatan dan manifestasi pribadi"
+
+# Category archive.
+category_archive:
+  base_url: "/"
+  title_suffix: " &bull; Arsip Risan Bagja"
+
+# Handling Reading.
+exclude: [node_modules, bower_components, package.json, bower.json, gulpfile.js]
+keep_files: [assets, .git]
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+
+# Plugins
+gems:
+  - jekyll-paginate
+
+# Serving
+port: 4001
+host: localhost
+url: "http://localhost:4001"
+baseurl: ""
+
+# Outputting
+permalink: :title.html
+paginate: 5
+paginate_path: /page/:num
+timezone: "Europe/Stockholm"
+
+# Assets directory.
+assets_dir: "assets"
+css_dir: "assets/css"
+js_dir: "assets/js"
+image_dir: "assets/img"
+
+# Featured image.
+default_featured_image: "default-cover.jpg"
+hero_image_suffix: "-hero"

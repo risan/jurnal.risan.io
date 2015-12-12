@@ -1,0 +1,13 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+  Developer: Risan Bagja Pradana
+  Contact: risan [at] gmail.com
+  Twitter: @risanbagja
+  From: Stockholm, Sweden
+
+# THANKS
+
+# TECHNOLOGY COLOPHON
+  HTML5, Jekyll, Normalize.css

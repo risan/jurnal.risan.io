@@ -1,0 +1,18 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{% title %}</title>
+  <meta name="description" content="{% description %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% facebook_meta_tags %}
+  {% twitter_meta_tags %}
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="canonical" href="{% canonical_url %}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+  <style>{% include assets/critical.min.css %}</style>
+  <script>
+    {% include assets/load-css.min.js %}
+    loadCSS("{% css_url theme.min.css %}")
+  </script>
+  <noscript><link rel="stylesheet" href="{% css_url theme.min.css %}"></noscript>
+</head>

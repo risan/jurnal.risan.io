@@ -1,0 +1,33 @@
+.btn {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid @color-main;
+  border-radius: 4px;
+
+  &:link,
+  &:visited {
+    text-decoration: none;
+    transition: background .3s ease;
+  }
+
+  &:hover,
+  &:active {
+    color: #fff;
+    background-color: @color-main;
+  }
+}
+
+.btn-white {
+  &:link,
+  &:visited {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  &:hover,
+  &:active {
+    color: #fff;
+    background-color: #111;
+    border-color: #111;
+  }
+}

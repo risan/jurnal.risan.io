@@ -1,0 +1,221 @@
+.main-nav {
+  display: table-row;
+  background-color: #111;
+
+  h3 {
+    display: none;
+  }
+
+  .btn-nav-close {
+    display: none;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    @media (min-width: @screen-sm) {
+      display: table;
+      margin: auto;
+
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+  }
+
+  li {
+    margin: 0;
+    border-top: 1px solid #0a0a0a;
+
+    @media (min-width: @screen-sm) {
+      float: left;
+      border-top: none;  
+    }
+
+    &:first-child {
+      border-top: none;
+    }
+
+    a {
+      display: block;
+      font-size: .8rem;
+      line-height: 1.2rem;
+      text-transform: uppercase;
+      padding: 5px 20px;
+      box-sizing: border-box;
+
+      @media (min-width: @screen-sm) {
+        font-size: .8rem;
+        padding: 10px;
+      }
+
+      @media (min-width: @screen-md) {
+        font-size: 1rem;
+        padding: 15px;
+      }
+
+      &:link,
+      &:visited {
+        color: #fff;
+        transition: all .2s ease;
+      }
+
+      &:hover,
+      &:active {
+        text-decoration: none;
+        background-color: @color-main;
+      }
+    }
+  }
+}
+
+.nav-bg-overlay {
+  display: none;
+}
+
+.nav-push-active {
+  .main-nav {
+    z-index: 10;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    right: -@nav-width-sm;
+    bottom: 0;
+    width: @nav-width-sm;
+    min-height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transition: all .4s ease;
+
+    @media (min-width: @screen-sm) {
+      right: -@nav-width-md;
+      width: @nav-width-md;
+    }
+
+    @media (min-width: @screen-md) {
+      right: -@nav-width-lg;
+      width: @nav-width-lg;
+    }
+
+    h3 {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      line-height: 2rem;
+      color: #fff;
+      background-color: #090909;
+      padding: 15px 20px;
+
+      @media (min-width: @screen-sm) {
+        font-size: 1.8rem;
+        padding: 20px 25px;
+      }
+
+      @media (min-width: @screen-md) {
+        font-size: 2rem;
+        padding: 30px;
+      }
+    }
+
+    .btn-nav-close {
+      display: block;
+      position: absolute;
+      font-size: 2rem;
+      top: 18px;
+      right: 20px;
+      color: #fff;
+
+      @media (min-width: @screen-sm) {
+        font-size: 2.3rem;
+        top: 22px;
+        right: 25px;
+      }
+
+      @media (min-width: @screen-md) {
+        font-size: 2.8rem;
+        top: 33px;
+        right: 30px;
+      }
+
+      &:hover,
+      &:active {
+        color: @color-main;
+        text-decoration: none;
+      }
+    }
+
+    ul {
+      @media (min-width: @screen-sm) {
+        display: block;
+      }
+    }
+
+    li {
+      margin: 0;
+      border-top: 1px solid #0a0a0a;
+
+      @media (min-width: @screen-sm) {
+        float: none;
+        border-top: 1px solid #0a0a0a;
+      }
+
+      a {
+        font-size: .8rem;
+        line-height: 1.2rem;
+        padding: 8px 20px;
+
+        @media (min-width: @screen-sm) {
+          font-size: .9rem;
+          padding: 12px 25px;
+        }
+
+        @media (min-width: @screen-md) {
+          font-size: 1rem;
+          padding: 15px 30px;
+        }
+
+
+        &:link,
+        &:visited {
+          color: #ccc;
+        }
+
+        &:hover,
+        &:active {
+          color: #fff;
+          background-color: @color-main;
+        }
+      }
+    }
+  }
+
+  .nav-bg-overlay {
+    display: none;
+  }
+}
+
+.nav-push-active.nav-open {
+  overflow: hidden;
+  
+  .main-nav {
+    opacity: 1;
+    right: 0;
+  }
+
+  .nav-bg-overlay {
+    z-index: 5;
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: .7;
+    background-color: #000;
+  }
+}

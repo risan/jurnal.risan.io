@@ -1,0 +1,17 @@
+{
+  "name": "jurnal.risan.io",
+  "version": "1.0.0",
+  "description": "Risan Bagja personal blog bower package file.",
+  "authors": [
+    {
+      "name": "Risan Bagja Pradana",
+      "email": "risanbagja@gmail.com",
+      "homepage": "https://github.com/risan"
+    }
+  ],
+  "private": true,
+  "devDependencies": {
+    "normalize-css": "normalize.css#~3.0.3",
+    "loadcss": "~0.2.4"
+  }
+}

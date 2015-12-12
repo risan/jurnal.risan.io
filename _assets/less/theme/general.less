@@ -1,0 +1,106 @@
+html {
+  font-size: 18px;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  font-size: 1rem;
+  font-family: @font-main;
+  color: @font-color;
+  line-height: 1.5em;
+  min-height: 100%;
+  margin: 0;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2em;
+  margin: 0 0 0 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+a {
+  &:link,
+  &:visited {
+    color: @color-main;
+    text-decoration: none;
+    transition: color .2s;
+  }
+
+  &:hover,
+  &:active {
+    text-decoration: underline;
+    color: @color-secondary;
+  }
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6em;
+  margin: 0 0 1em 0;
+}
+
+
+ul, ol {
+  margin: 1em 0;
+  padding: 0 0 0 2em;
+
+  @media (min-width: @screen-md) {
+    padding-left: 2.5em;
+  }
+}
+
+li {
+  font-size: 1rem;
+  margin-bottom: .5em;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+}
+
+blockquote {
+  padding: .5rem 0 .5rem 1rem;
+  margin: 1rem 0;
+  border-left: 7px solid @color-main;
+
+  @media (min-width: @screen-md) {
+    padding: .75rem 0 .75rem 1.25rem;
+    margin: 1.5rem 0 1.5rem 1.25rem;
+  }
+}
+
+blockquote,
+blockquote p {
+  font-size: 1rem;
+  font-style: italic;
+  color: #888;
+
+  @media (min-width: @screen-md) {
+    font-size: 1.2rem;
+  }
+}
+
+blockquote p {
+  margin: 0;
+}

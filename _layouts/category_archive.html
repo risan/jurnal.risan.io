@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+  {% include head.html %}
+  <body>
+    {% include header-category.html %}
+    <main class="content">
+      {% for post in page.posts %}
+        <article class="post-archive">
+          <header>
+            <small class="post-meta">
+              <time datetime="{{ post.date | date: '%F' }}">{{ post.date | date_locale }}</time>
+            </small>
+            <h2 class="post-title">
+              <a href="{{ post.url prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a>
+            </h2>
+          </header>
+        </article>
+      {% endfor %}
+    </main>
+    {% include footer.html %}
+    {% include scripts.html %}
+  </body>
+</html>
