@@ -2,6 +2,8 @@
 
 This is a repository of my personal blog. All posts are written in Bahasa and mostly about my daily life, my thoughts, travelling stories and some fictions. Built on top of [Jekyll](http://jekyllrb.com/) to gain a maximum performance and high security level over the generated static files.
 
+You may visit the website here: [jurnal.risan.io](https://jurnal.risan.io)
+
 ## Install Jekyll
 
 In order to install this blog on your machine, you will need [Jekyll](http://jekyllrb.com/) installed. Before installing Jekyll, make sure you have the following stuff:
