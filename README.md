@@ -1,29 +1,29 @@
-## Jurnal - My Personal Blog
+# Personal Blog
 
-This a repository of my personal blog in Bahasa, mostly about my daily life, my thoughts, travelling stories and some short fictions. Built on top of [Jekyll](http://jekyllrb.com/) to gain a maximum performance and hight security level over generated static files.
+This is a repository of my personal blog. All posts are written in Bahasa and mostly about my daily life, my thoughts, travelling stories and some fictions. Built on top of [Jekyll](http://jekyllrb.com/) to gain a maximum performance and high security level over the generated static files.
 
 ## Install Jekyll
 
-In order to install this Jekyll powered blog, of course you will need [Jekyll](http://jekyllrb.com/) on your machine. Before installing Jekyll, make sure you have:
+In order to install this blog on your machine, you will need [Jekyll](http://jekyllrb.com/) installed. Before installing Jekyll, make sure you have the following stuff:
 
 - [Ruby](http://www.ruby-lang.org/en/downloads/)
 - [RubyGems](http://rubygems.org/pages/download)
 
 If you already have Ruby and RubyGems, simply run the following command:
 
-```
+```bash
 gem install jekyll
 ```
 
-You will also need [bundler](http://bundler.io/) to easily manage Ruby Gems:
+You will also need [bundler](http://bundler.io/) to install third party Jekyll plugin. To install bundler, run the following command:
 
-```
+```bash
 gem install bundler
 ```
 
 ## Install Node & Automation Tools
 
-You will also need the following stuff installed:
+This blog leverages some Node.JS based automation tools to automatically build assets. Make sure you have the following stuff on your machine:
 
 - [Node.JS](https://nodejs.org/en/download/)
 - [NPM](https://www.npmjs.com/) (Included in Node.JS package)
@@ -32,56 +32,56 @@ You will also need the following stuff installed:
 
 ### Install ImageMagick
 
-This blog using [gulp-image-resize](https://github.com/scalableminds/gulp-image-resize) package for resizing images. And it will require you to have ImageMagick library.
+This blog using [gulp-image-resize](https://github.com/scalableminds/gulp-image-resize) package for resizing and optimizing images. This pacakge will require you to have ImageMagick library.
 
-On Ubuntu machine:
+To install ImageMagick on Ubuntu:
 
-```
+```bash
 sudo apt-get install
 sudo apt-get install imagemagick
 ```
 
-On OS X with [Homebrew](http://brew.sh/):
+To install ImageMagick on OS X via [Homebrew](http://brew.sh/):
 
-```
+```bash
 brew install imagemagick
 ```
 
 ## Setup Blog
 
-Once you have all required dependencies, it's time to setup this blog on your machine.
+Once you have all required dependencies above, it's time to setup this blog on your machine.
 
 ### Clone to Your Local Machine
 
-Using git command, clone this repository to `my-blog` directory:
+Using git command, clone this repository to `my-blog` directory or whatever directory you want:
 
-```
+```bash
 git clone git@github.com:risan/jurnal.risan.io.git my-blog
 ```
 
-Then change the current directory to `my-blog`:
+Change the current directory to `my-blog`:
 
-```
+```bash
 cd my-blog
 ```
 
 ### Install Jekyll Plugin
 
-This blog using the following external plugin:
+The next step is to install third party Jekyll plugins. This blog using the following external plugins:
 
 - [Jekyll Paginate](https://github.com/jekyll/jekyll-paginate)
 
-To install it using [bundler](http://bundler.io/), run the following command inside `my-blog` directory:
+To install these plugins, we can use [bundler](http://bundler.io/) command. Run the following command inside `my-blog` directory:
 
-```
+```bash
 bundle install
 ```
 
 ### Install NPM Packages
 
-Next, install all required NPM packages by simply running:
+Install all required NPM packages by running the following command:
 
-```
+```bash
 npm install
 ```
 
@@ -89,21 +89,21 @@ npm install
 
 Now we need to install all required bower packages:
 
-```
+```bash
 bower install
 ```
 
 ### Setup _config.yml
 
-We have all required dependencies to generate this blog. Now we need to configure `_config.yml` file.
+We have all required plugins and packages to generate this blog. The next step is to configure the `_config.yml` file. Open up this file:
 
-```
+```bash
 sudo nano _config.yml
 ```
 
 Then update the following directives to match your configuration.
 
-```
+```bash
 ...
 port: 4000
 host: localhost
@@ -113,45 +113,45 @@ url: "http://localhost"
 
 ## Build The Site!
 
-Finally, we can now build our Jekyll powered website.
+Now it's time to build our website.
 
 ### Build Assets File with Gulp
 
 First we build our assets files (js, css and images) using Gulp command:
 
-```
+```bash
 gulp
 ```
 
-If you want to watch over the asset file changes and automatically run `gulp` command to rebuild it, run the following command:
+Or if you want to watch over the asset file changes and automatically run `gulp` command to rebuild it, run the following command:
 
-```
+```bash
 gulp watch
 ```
 
-The asset files will be put on `_site/assets` directory. While some inline css and js will go to `_includes/assets` directory.
+The asset files will be put on `_site/assets` directory. While some inline css and js files will reside at `_includes/assets` directory.
 
-### Build Jekyll Website
+### Generate Web Pages
 
-Now it's time to build the Jekyll powered website. Just run the following command:
+Lastly, we generate the web pages by running the following command:
 
-```
+```bash
 jekyll build
 ```
 
-The generated website will be at `_site` directory.
+This command will generate a static web pages at `_site` directory.
 
-If you want to watch over a file changes and rebuild the Jekyll website, run the following command:
+If you want to watch over a file changes and rebuild the Jekyll website, run the following command instead:
 
-```
+```bash
 jekyll serve
 ```
 
-With the above command, you can also visit the generated static file on browser:
+With the above command, you can also visit the generated static file using browser:
 
-```
+```bash
 http://localhost:4000
 ```
 
-The host and the port number depends on the `_config.yml` directive values.
+The host and the port number depends on the `_config.yml` directive values you have defined.
 
