@@ -23,7 +23,7 @@ category_archive:
   title_suffix: " &bull; Arsip Risan Bagja"
 
 # Handling Reading.
-exclude: [node_modules, bower_components, package.json, bower.json, gulpfile.js, Gemfile, Gemfile.lock]
+exclude: [node_modules, bower_components, package.json, bower.json, gulpfile.js, Gemfile, Gemfile.lock, README.md]
 keep_files: [assets, .git]
 
 # Conversion
