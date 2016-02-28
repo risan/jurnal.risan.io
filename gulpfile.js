@@ -103,14 +103,14 @@ gulp.task('css-critical', function() {
 
 gulp.task('css-theme', function() {
   return gulp.buildLess([
-      'bower_components/normalize-css/normalize.css',
+      'node_modules/normalize.css/normalize.css',
       '_assets/less/theme/theme.less'
     ], 'theme.min.css', '_site/assets/css');
 });
 
 gulp.task('js-load-css', function() {
   return gulp.buildJs(
-    'bower_components/loadcss/loadCSS.js',
+    'node_modules/fg-loadcss/src/loadCSS.js',
     'load-css.min.js', '_includes/assets', true, false);
 });
 

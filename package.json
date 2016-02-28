@@ -29,5 +29,9 @@
     "gulp-watch": "^4.3.5",
     "jshint-stylish": "^2.0.1"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "fg-loadcss": "^1.0.0-0",
+    "normalize.css": "^3.0.3"
+  }
 }

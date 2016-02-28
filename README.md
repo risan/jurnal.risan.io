@@ -30,7 +30,6 @@ This blog leverages some Node.JS based automation tools to automatically build a
 - [Node.JS](https://nodejs.org/en/download/)
 - [NPM](https://www.npmjs.com/) (Included in Node.JS package)
 - [Gulp](http://gulpjs.com/)
-- [Bower](http://bower.io/)
 
 ### Install ImageMagick
 
@@ -85,14 +84,6 @@ Install all required NPM packages by running the following command:
 
 ```bash
 npm install
-```
-
-### Install Bower Packages
-
-Now we need to install all required bower packages:
-
-```bash
-bower install
 ```
 
 ### Setup _config.yml
