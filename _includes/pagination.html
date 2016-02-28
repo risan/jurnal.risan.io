@@ -1,14 +1,14 @@
 {% if paginator.total_pages > 1 %}
-  <nav class="pagination">
-    {% if paginator.previous_page %}
-      <a class="btn btn-newer" href="{{ paginator.previous_page_path }}" title="Halaman selanjutnya" rel="prev">
-        &larr; Selanjutnya
-      </a>
-    {% endif %}
-    {% if paginator.next_page %}
-      <a class="btn btn-older" href="{{ paginator.next_page_path }}" title="Laman sebelumnya" rel="next">
-        Sebelumnya &rarr;
-      </a>
-    {% endif %}
-  </nav>
+    <nav class="pagination">
+        {% if paginator.previous_page %}
+            <a class="btn btn-newer" href="{{ paginator.previous_page_path }}" title="Halaman selanjutnya" rel="prev">
+                &larr; Selanjutnya
+            </a>
+        {% endif %}
+        {% if paginator.next_page %}
+            <a class="btn btn-older" href="{{ paginator.next_page_path }}" title="Laman sebelumnya" rel="next">
+                Sebelumnya &rarr;
+            </a>
+        {% endif %}
+    </nav>
 {% endif %}
