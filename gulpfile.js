@@ -1,92 +1,64 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var os = require('os');
+var extend = require('extend');
 var parallel = require('concurrent-transform');
 
-var JS_DIR = '_site/assets/css';
+var JS_DIR = '_site/assets/js';
 var CSS_DIR = '_site/assets/css';
 var IMG_DIR = '_site/assets/img';
 var TEMPLATE_ASSETS_DIR = '_includes/assets';
 
 gulp.task('theme.js', function() {
-  return buildJs({
-    source: [
-      '_assets/js/theme.js',
-    ],
+  return buildCustomJs({
+    source: ['_assets/js/theme.js'],
     filename: 'theme.min.js',
-    destination: JS_DIR,
-    validate: true,
-    sourcemaps: true,
   });
 });
 
 gulp.task('loadCSS.js', function() {
-  return buildJs({
-    source: [
-      'node_modules/fg-loadcss/src/loadCSS.js',
-    ],
+  return buildTemplateJs({
+    source: ['node_modules/fg-loadcss/src/loadCSS.js'],
     filename: 'load-css.min.js',
-    destination: TEMPLATE_ASSETS_DIR,
-    validate: false,
-    sourcemaps: false,
   });
 });
 
 gulp.task('disqus.js', function() {
-  return buildJs({
-    source: [
-      '_assets/js/disqus.js',
-    ],
+  return buildTemplateJs({
+    source: ['_assets/js/disqus.js'],
     filename: 'disqus.min.js',
-    destination: TEMPLATE_ASSETS_DIR,
-    validate: false,
-    sourcemaps: false,
   });
 });
 
 gulp.task('ga.js', function() {
-  return buildJs({
-    source: [
-      '_assets/js/google-analytics.js',
-    ],
+  return buildTemplateJs({
+    source: ['_assets/js/google-analytics.js'],
     filename: 'google-analytics.min.js',
-    destination: TEMPLATE_ASSETS_DIR,
-    validate: false,
-    sourcemaps: false,
   });
 });
 
 gulp.task('theme.css', function() {
-  return buildCss({
+  return buildCustomCss({
     source: [
       'node_modules/normalize.css/normalize.css',
       '_assets/less/theme/theme.less',
     ],
     filename: 'theme.min.css',
-    destination: CSS_DIR,
-    sourcemaps: true,
   });
 });
 
 gulp.task('critical.css', function() {
-  return buildCss({
-    source: [
-      '_assets/less/critical/critical.less',
-    ],
+  return buildTemplateCss({
+    source: ['_assets/less/critical/critical.less'],
     filename: 'critical.min.css',
-    destination: TEMPLATE_ASSETS_DIR,
-    sourcemaps: false,
   });
 });
 
 gulp.task('featured.img', function() {
   return buildImages({
-    source: [
-      '_assets/img/**/*-cover.jpg',
-    ],
-    destination: IMG_DIR,
+    source: ['_assets/img/**/*-cover.jpg'],
     maxWidth: 1800,
-    maxWidth: 450,
+    maxHeight: 450,
     quality: 0.6,
     suffix: '-hero',
   });
@@ -94,12 +66,9 @@ gulp.task('featured.img', function() {
 
 gulp.task('hires.featured.img', function() {
   return buildImages({
-    source: [
-      '_assets/img/**/*-cover-hires.jpg',
-    ],
-    destination: IMG_DIR,
+    source: ['_assets/img/**/*-cover-hires.jpg'],
     maxWidth: 1800,
-    maxWidth: 600,
+    maxHeight: 600,
     quality: 0.8,
     suffix: '-hero',
   });
@@ -107,12 +76,9 @@ gulp.task('hires.featured.img', function() {
 
 gulp.task('post.img', function() {
   return buildImages({
-    source: [
-      '_assets/img/**/*.jpg',
-    ],
-    destination: IMG_DIR,
+    source: ['_assets/img/**/*.jpg'],
     maxWidth: 1200,
-    maxWidth: 700,
+    maxHeight: 700,
     quality: 0.6,
   });
 });
@@ -130,6 +96,44 @@ gulp.task('watch', function() {
   gulp.watch('_assets/js/**/*.js', ['js']);
   gulp.watch('_assets/img/**/*', ['img']);
 });
+
+function buildCustomJs(options) {
+  extend(options, {
+    destination: JS_DIR,
+    validate: true,
+    sourcemaps: true,
+  });
+
+  return buildJs(options);
+}
+
+function buildTemplateJs(options) {
+  extend(options, {
+    destination: TEMPLATE_ASSETS_DIR,
+    validate: false,
+    sourcemaps: false,
+  });
+
+  return buildJs(options);
+}
+
+function buildCustomCss(options) {
+  extend(options, {
+    destination: CSS_DIR,
+    sourcemaps: true,
+  });
+
+  return buildCss(options);
+}
+
+function buildTemplateCss(options) {
+  extend(options, {
+    destination: TEMPLATE_ASSETS_DIR,
+    sourcemaps: false,
+  });
+
+  return buildCss(options);
+}
 
 function buildJs(options) {
   return gulp.src(options.source)
@@ -158,26 +162,18 @@ function buildCss(options) {
 
 function buildImages(options) {
   return gulp.src(options.source)
-    .pipe(plugins.changed(options.destination))
+    .pipe(plugins.changed(IMG_DIR))
     .pipe(parallel(
       plugins.imageResize({
         width : options.maxWidth,
         height: options.maxHeight,
         crop: true,
         upscale : false,
-        quality: options.quality
-      }), os.cpus().length))
-    .pipe(options.suffix ? plugins.rename(function(path) { path.basename += options.suffix; }) : nope())
-    .pipe(plugins.imagemin({
-      progressive: true
-    }))
-    .pipe(gulp.dest(options.destination));
-};
-
-function copy(src, dest) {
-  return gulp.src(src)
-    .pipe(plugins.plumber())
-    .pipe(gulp.dest(dest));
+        quality: options.quality,
+      }), cpuCores()))
+    .pipe(options.suffix ? addSuffix(options.suffix) : nope())
+    .pipe(plugins.imagemin({ progressive: true }))
+    .pipe(gulp.dest(IMG_DIR));
 };
 
 function initSourcemaps() {
@@ -198,6 +194,16 @@ function writeSourcemaps() {
 
 function isProduction() {
   return plugins.util.env.type === 'production';
+}
+
+function addSuffix(suffix) {
+  return plugins.rename(function(path) {
+    path.basename += suffix;
+  });
+}
+
+function cpuCores() {
+  return os.cpus().length;
 }
 
 function nope() {
