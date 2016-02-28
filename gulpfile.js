@@ -1,168 +1,205 @@
-var gulp          = require('gulp'),
-    autoprefixer  = require('gulp-autoprefixer'),
-    changed       = require('gulp-changed'),
-    concat        = require('gulp-concat'),
-    imagemin      = require('gulp-imagemin'),
-    imageResize   = require('gulp-image-resize'),
-    jshint        = require('gulp-jshint'),
-    less          = require('gulp-less'),
-    minify        = require('gulp-minify-css'),
-    os            = require('os'),
-    parallel      = require('concurrent-transform'),
-    plumber       = require('gulp-plumber'),
-    rename        = require('gulp-rename'),
-    replace       = require('gulp-replace'),
-    sourcemaps    = require('gulp-sourcemaps'),
-    uglify        = require('gulp-uglify'),
-    gutil         = require('gulp-util');
+var gulp = require('gulp');
+var plugins = require('gulp-load-plugins')();
+var os = require('os');
+var parallel = require('concurrent-transform');
 
-/**
- * Build Less files.
- *
- * @param  {string} src           Sources files location
- * @param  {string} filename      Build result filename
- * @param  {string} dest          Build result location
- * @param  {bool}   withSourceMap Generate with sourcemaps or not
- * @return {Gulp}
- */
-gulp.buildLess = function(src, filename, dest, withSourceMap) {
-  if (withSourceMap === undefined || withSourceMap === null) {
-    withSourceMap = gutil.env.type !== 'production';
-  }
+var JS_DIR = '_site/assets/css';
+var CSS_DIR = '_site/assets/css';
+var IMG_DIR = '_site/assets/img';
+var TEMPLATE_ASSETS_DIR = '_includes/assets';
 
-  return gulp.src(src)
-    .pipe(plumber())
-    .pipe(withSourceMap ? sourcemaps.init() : gutil.noop())
-      .pipe(less())
-      .pipe(concat(filename))
-      .pipe(minify())
-    .pipe(withSourceMap ? sourcemaps.write() : gutil.noop())
-    .pipe(gulp.dest(dest));
-};
-
-/**
- * Build js files.
- *
- * @param  {string} src           Sources files location
- * @param  {string} filename      Build result filename
- * @param  {string} dest          Build result location
- * @param  {bool}   validate      Validate the js files
- * @param  {bool}   withSourceMap Generate with sourcemaps or not
- * @return {Gulp}
- */
-gulp.buildJs = function(src, filename, dest, validate, withSourceMap) {
-  if (withSourceMap === undefined || withSourceMap === null) {
-    withSourceMap = gutil.env.type !== 'production';
-  }
-
-  return gulp.src(src)
-    .pipe(plumber())
-    .pipe(validate === true ? jshint() : gutil.noop())
-    .pipe(validate === true ? jshint.reporter('jshint-stylish') : gutil.noop())
-    .pipe(withSourceMap ? sourcemaps.init() : gutil.noop())
-      .pipe(concat(filename))
-      .pipe(uglify())
-    .pipe(withSourceMap ? sourcemaps.write() : gutil.noop())
-    .pipe(gulp.dest(dest));
-};
-
-/**
- * Build images.
- *
- * @param  {string} src       Sources file location
- * @param  {string} dest      Build result location
- * @param  {int} maxWidth     Maximum image width
- * @param  {int} maxHeight    Maximum image height
- * @param  {float} quality    JPG image quality
- * @param  {string} suffix    Suffix to be added to compressed image
- * @return {Gulp}
- */
-gulp.buildImages = function(src, dest, maxWidth, maxHeight, quality, suffix) {
-  return gulp.src(src)
-    .pipe(changed(dest))
-    .pipe(parallel(
-      imageResize({
-        width : maxWidth,
-        height: maxHeight,
-        crop: true,
-        upscale : false,
-        quality: quality
-      }), os.cpus().length))
-    .pipe(suffix ? rename(function(path) { path.basename += suffix; }) : gutil.noop())
-    .pipe(imagemin({
-      progressive: true
-    }))
-    .pipe(gulp.dest(dest));
-};
-
-gulp.task('css-critical', function() {
-  return gulp.buildLess(
-    '_assets/less/critical/critical.less',
-    'critical.min.css', '_includes/assets', false);
+gulp.task('theme.js', function() {
+  return buildJs({
+    source: [
+      '_assets/js/theme.js',
+    ],
+    filename: 'theme.min.js',
+    destination: JS_DIR,
+    validate: true,
+    sourcemaps: true,
+  });
 });
 
-gulp.task('css-theme', function() {
-  return gulp.buildLess([
+gulp.task('loadCSS.js', function() {
+  return buildJs({
+    source: [
+      'node_modules/fg-loadcss/src/loadCSS.js',
+    ],
+    filename: 'load-css.min.js',
+    destination: TEMPLATE_ASSETS_DIR,
+    validate: false,
+    sourcemaps: false,
+  });
+});
+
+gulp.task('disqus.js', function() {
+  return buildJs({
+    source: [
+      '_assets/js/disqus.js',
+    ],
+    filename: 'disqus.min.js',
+    destination: TEMPLATE_ASSETS_DIR,
+    validate: false,
+    sourcemaps: false,
+  });
+});
+
+gulp.task('ga.js', function() {
+  return buildJs({
+    source: [
+      '_assets/js/google-analytics.js',
+    ],
+    filename: 'google-analytics.min.js',
+    destination: TEMPLATE_ASSETS_DIR,
+    validate: false,
+    sourcemaps: false,
+  });
+});
+
+gulp.task('theme.css', function() {
+  return buildCss({
+    source: [
       'node_modules/normalize.css/normalize.css',
-      '_assets/less/theme/theme.less'
-    ], 'theme.min.css', '_site/assets/css');
+      '_assets/less/theme/theme.less',
+    ],
+    filename: 'theme.min.css',
+    destination: CSS_DIR,
+    sourcemaps: true,
+  });
 });
 
-gulp.task('js-load-css', function() {
-  return gulp.buildJs(
-    'node_modules/fg-loadcss/src/loadCSS.js',
-    'load-css.min.js', '_includes/assets', true, false);
+gulp.task('critical.css', function() {
+  return buildCss({
+    source: [
+      '_assets/less/critical/critical.less',
+    ],
+    filename: 'critical.min.css',
+    destination: TEMPLATE_ASSETS_DIR,
+    sourcemaps: false,
+  });
 });
 
-gulp.task('js-disqus', function() {
-  return gulp.buildJs(
-    '_assets/js/disqus.js',
-    'disqus.min.js', '_includes/assets', true, false);
+gulp.task('featured.img', function() {
+  return buildImages({
+    source: [
+      '_assets/img/**/*-cover.jpg',
+    ],
+    destination: IMG_DIR,
+    maxWidth: 1800,
+    maxWidth: 450,
+    quality: 0.6,
+    suffix: '-hero',
+  });
 });
 
-gulp.task('js-google-analytics', function() {
-  return gulp.buildJs(
-    '_assets/js/google-analytics.js',
-    'google-analytics.min.js', '_includes/assets', false, false);
+gulp.task('hires.featured.img', function() {
+  return buildImages({
+    source: [
+      '_assets/img/**/*-cover-hires.jpg',
+    ],
+    destination: IMG_DIR,
+    maxWidth: 1800,
+    maxWidth: 600,
+    quality: 0.8,
+    suffix: '-hero',
+  });
 });
 
-gulp.task('js-theme', function() {
-  return gulp.buildJs(
-    '_assets/js/theme.js',
-    'theme.min.js', '_site/assets/js', true);
+gulp.task('post.img', function() {
+  return buildImages({
+    source: [
+      '_assets/img/**/*.jpg',
+    ],
+    destination: IMG_DIR,
+    maxWidth: 1200,
+    maxWidth: 700,
+    quality: 0.6,
+  });
 });
 
-gulp.task('featured-images', function() {
-  return gulp.buildImages(
-    '_assets/img/**/*-cover.jpg',
-    '_site/assets/img', 1800, 450, 0.6, '-hero'
-  );
-});
+gulp.task('default', ['js', 'css', 'img']);
 
-gulp.task('hires-featured-images', function() {
-  return gulp.buildImages(
-    '_assets/img/**/*-cover-hires.jpg',
-    '_site/assets/img', 1800, 600, 0.8, '-hero'
-  );
-});
+gulp.task('js', ['theme.js', 'loadCSS.js', 'disqus.js', 'ga.js']);
 
-gulp.task('all-images', function() {
-  return gulp.buildImages(
-    '_assets/img/**/*.jpg',
-    '_site/assets/img', 1200, 700, 0.6
-  );
-});
+gulp.task('css', ['theme.css', 'critical.css']);
 
-gulp.task('default', ['css', 'js', 'images']);
-
-gulp.task('css', ['css-critical', 'css-theme']);
-
-gulp.task('js', ['js-load-css', 'js-disqus', 'js-google-analytics', 'js-theme']);
-
-gulp.task('images', ['featured-images', 'hires-featured-images', 'all-images']);
+gulp.task('img', ['featured.img', 'hires.featured.img', 'post.img']);
 
 gulp.task('watch', function() {
   gulp.watch('_assets/less/**/*.less', ['css']);
   gulp.watch('_assets/js/**/*.js', ['js']);
-  gulp.watch('_assets/img/**/*', ['images']);
+  gulp.watch('_assets/img/**/*', ['img']);
 });
+
+function buildJs(options) {
+  return gulp.src(options.source)
+    .pipe(plugins.plumber())
+    .pipe(options.validate ? plugins.jshint() : nope())
+    .pipe(options.validate ? plugins.jshint.reporter('jshint-stylish') : nope())
+    .pipe(options.validate ? plugins.jscs() : nope())
+    .pipe(options.validate ? plugins.jscs.reporter() : nope())
+    .pipe(initSourcemaps())
+      .pipe(plugins.concat(options.filename))
+      .pipe(plugins.uglify())
+    .pipe(options.sourcemaps ? writeSourcemaps() : nope())
+    .pipe(gulp.dest(options.destination));
+}
+
+function buildCss(options) {
+  return gulp.src(options.source)
+    .pipe(plugins.plumber())
+    .pipe(initSourcemaps())
+      .pipe(plugins.less())
+      .pipe(plugins.concat(options.filename))
+      .pipe(plugins.cssnano())
+    .pipe(options.sourcemaps ? writeSourcemaps() : nope())
+    .pipe(gulp.dest(options.destination));
+};
+
+function buildImages(options) {
+  return gulp.src(options.source)
+    .pipe(plugins.changed(options.destination))
+    .pipe(parallel(
+      plugins.imageResize({
+        width : options.maxWidth,
+        height: options.maxHeight,
+        crop: true,
+        upscale : false,
+        quality: options.quality
+      }), os.cpus().length))
+    .pipe(options.suffix ? plugins.rename(function(path) { path.basename += options.suffix; }) : nope())
+    .pipe(plugins.imagemin({
+      progressive: true
+    }))
+    .pipe(gulp.dest(options.destination));
+};
+
+function copy(src, dest) {
+  return gulp.src(src)
+    .pipe(plugins.plumber())
+    .pipe(gulp.dest(dest));
+};
+
+function initSourcemaps() {
+  if (!isProduction()) {
+    return plugins.sourcemaps.init({ loadMaps: true });
+  }
+
+  return nope();
+}
+
+function writeSourcemaps() {
+  if (!isProduction()) {
+    return plugins.sourcemaps.write('.');
+  }
+
+  return nope();
+}
+
+function isProduction() {
+  return plugins.util.env.type === 'production';
+}
+
+function nope() {
+  return plugins.util.noop();
+}

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   var $el = {};
@@ -73,7 +73,7 @@
     }
 
     classes.push(classname);
-    $el.className = classes.join(' ').replace(/^\s+|\s+$/,'');
+    $el.className = classes.join(' ').replace(/^\s+|\s+$/, '');
   }
 
   /**
@@ -84,14 +84,14 @@
    * @return {[type]}           [description]
    */
   function toggleClass($el, classname) {
-    var classes = $el.className.split(/\s+/),
-        exist = ~classes.indexOf(classname);
+    var classes = $el.className.split(/\s+/);
+    var exist = ~classes.indexOf(classname);
 
     classes.splice(exist ? classes.indexOf(classname) : 0,
                exist ? 1 : 0,
                exist ? null : classname);
 
-    $el.className = classes.join(' ').replace(/^\s+|\s+$/,'');
+    $el.className = classes.join(' ').replace(/^\s+|\s+$/, '');
   }
 
   init();
