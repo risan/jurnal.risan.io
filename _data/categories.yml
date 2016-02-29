@@ -4,3 +4,9 @@ catatan:
   sub_heading: "Kumpulan catatan harian"
   description: "Kumpulan catatan harian Risan Bagja tentang banyak hal"
   featured_image: "jurnal-cover.jpg"
+fiksi:
+  slug: "fiksi"
+  title: "Fiksi"
+  sub_heading: "Kumpulan prosa naratif"
+  description: "Kumpulan prosa naratif karya Risan Bagja"
+  featured_image: "jurnal-cover.jpg"

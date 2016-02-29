@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hore, Blog Baru!"
-date: 2015-12-12 18:00:00 +0100
+date: 2015-12-09 18:00:00 +0100
 category: catatan
 featured_image: "typewriter-cover.jpg"
 description: >
