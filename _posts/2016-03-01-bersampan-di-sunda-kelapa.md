@@ -10,7 +10,7 @@ description: >
 
 "Istri Pak?" Tanya pria bertubuh gempal nan kekar di hadapanku ini. Jelas yang ia maksud 'istri' adalah kekasihku ini—Alicia Nevriana.
 
-"Calon,"" Jawabku singkat sembari melemparkan senyum selebar-lebarnya. Sambil meng-aamiin-i dalam hati, kutarik lengan kekasihku, menuntunnya untuk naik di atas sampan milik pria bertubuh gempal ini.
+"Calon," Jawabku singkat sembari melemparkan senyum selebar-lebarnya. Sambil meng-aamiin-i dalam hati, kutarik lengan kekasihku, menuntunnya untuk naik di atas sampan milik pria bertubuh gempal ini.
 
 Pria berbadan gempal pemilik sampan ini bernama Pak Oting. Kulitnya legam karena terlalu sering dibakar matahari. Matanya hitam berkilat-kilat, pandangannya tajam. Senyumnya selalu terkembang, memperlihatkan gigi-gigi putihnya yang tersusun rapi. Pria asal Bugis ini sudah 30 tahun menawarkan jasa sampannya, mengantar para pelancong mengelilingi Pelabuhan Sunda Kelapa. Ia hidup sendiri di Jakarta, sementara istri dan anak-anaknya menetap di Buton.
 
