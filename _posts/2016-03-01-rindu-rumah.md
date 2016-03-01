@@ -3,7 +3,7 @@ layout: post
 title: "Rindu Rumah"
 date: 2016-03-01 19:03:00 +0100
 category: catatan
-featured_image: "perangkonero-cover.jpg"
+featured_image: "rindu-rumah-cover.jpg"
 description: >
   Entah sudah berapa malam aku merindukan rumah. Merindukan hangatnya tempatku dibesarkan. Terakhir aku pulang tepat satu bulan yang lalu, itupun hanya untuk satu malam.
 ---
