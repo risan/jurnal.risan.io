@@ -4,6 +4,12 @@ catatan:
   sub_heading: "Kumpulan catatan harian"
   description: "Kumpulan catatan harian Risan Bagja tentang banyak hal"
   featured_image: "jurnal-cover.jpg"
+avontur:
+  slug: "avontur"
+  title: "Avontur"
+  sub_heading: "Kumpulan catatan perjalanan"
+  description: "Kumpulan kisah pertualangan Risan Bagja"
+  featured_image: "jurnal-cover.jpg"
 fiksi:
   slug: "fiksi"
   title: "Fiksi"
